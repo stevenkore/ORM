@@ -5,21 +5,9 @@ import {Category} from "./entity/Category";
 // connection settings are in the "ormconfig.json" file
 createConnection().then(async connection => {
 
-    const category1 = new Category();
-    category1.name = "TypeScript";
+const postRepo = connection.getRepository(Post);
 
-    const category2 = new Category();
-    category2.name = "Programming";
-
-    const post = new Post();
-    post.title = "tiitel";
-    post.text = "hiiiiii";
-
-    return connection
-        .getRepository(Post)
-        .save(post)
-        .then(post => {
-            console.log("Post has been saved: ", post);
-        });
+await postRepo.delete({id : 33});
+connection.getRepository(Post).save(post);
 
 }).catch(error => console.log("Error: ", error));
